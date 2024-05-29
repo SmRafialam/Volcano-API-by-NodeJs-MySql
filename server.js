@@ -3,16 +3,33 @@ const express = require('express');
 // const db = require('./db'); // Import the Knex instance
 // import knex from './knexfile';
 const Knex = require('knex');
-const knex = Knex(require('./knexfile').development); // Use specific development config
+const knex = Knex(require('./knexdb').development); // Use specific development config
 const app = express();
-// import mysql from 'mysql2/promise';
-// const mysql = require('mysql2');
 const PORT = process.env.PORT || 3000;
+
+app.get('/status', (request, response) => {
+  const status = {
+     'Status': 'Running'
+  };
+  
+  response.send(status);
+});
+
+app.get('/users', async (req, res) => {
+  try {
+    const users = await knex.select('*').from('users');
+    res.json(users);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: 'Failed to fetch users' });
+  }
+});
 
 // Example endpoint to get all volcanoes
 app.get('/volcanoes', async (req, res) => {
+  // console.log(res);
   try {
-    console.log(res)
+    // console.log(res);
     // const volcanoes = await db.select('*').from('volcanoes'); // Ensure the table name is correct
     const volcanoes = await knex.select('*').from('volcanoes');
     res.json(volcanoes);
@@ -66,35 +83,6 @@ app.get('/me', async (req, res) => {
     res.status(500).json({ message: 'Error fetching user profile' });
   }
 });
-
-
-// const db =  mysql.createConnection({
-//   host: 'localhost',
-//   port: 3306,
-//   user: 'root',
-//   password: 'password',
-//   database: 'volcanoes'
-// });
-
-// db.query(`Select * from volcanoes`,(error, result, fields)=> {
-//   console.log(error);
-//   console.log(result);
-//   console.log(fields);
-// })
-
-// // Get a connection from the pool
-// db.connect((err, connection) => {
-//   if (err) {
-//     console.error('Error connecting to MySQL:', err);
-//     return;
-//   }
-//   console.log('Connected to MySQL Server!');
-//   // Use the connection
-//   // For example: connection.query('SELECT * FROM table', (err, results) => { ... });
-
-//   // Release the connection back to the pool
-//   connection.release();
-// });
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
