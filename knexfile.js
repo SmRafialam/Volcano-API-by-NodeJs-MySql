@@ -4,8 +4,23 @@ const knex = require('knex');
 /**
  * @type { Object.<string, import("knex").Knex.Config> }
  */
-module.exports = {
+// module.exports = {
 
+//   development: {
+//     client: 'mysql2',
+//     // connection: {
+//     //   filename: './dev.sqlite3'
+//     // }
+//     connection: {
+//         host: '127.0.0.1',
+//         port: 3306,
+//         user: 'root',
+//         password: 'password',
+//         database: 'volcanoes'
+//       }
+//   },
+
+module.exports = {
   development: {
     client: 'mysql2',
     // connection: {
@@ -15,10 +30,11 @@ module.exports = {
         host: '127.0.0.1',
         port: 3306,
         user: 'root',
-        password: 'password',
+        password: '',
         database: 'volcanoes'
       }
   },
+};
 
   // staging: {
   //   client: 'postgresql',
@@ -52,7 +68,7 @@ module.exports = {
   //   }
   // }
 
-};
+// };
 
 // knex(config)
 //   .raw('CREATE DATABASE IF NOT EXISTS volcano;') // Create database if it doesn't exist (optional)
