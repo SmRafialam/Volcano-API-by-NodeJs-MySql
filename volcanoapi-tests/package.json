@@ -1,0 +1,24 @@
+{
+  "name": "volcanoapi-tests",
+  "version": "0.0.1",
+  "description": "resources to be used by the QUT CAB230 teaching team",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --config jest.config.json --runInBand"
+  },
+  "author": "Chad Gay <chad@chadgay.com>",
+  "contributors": [],
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "jest": "^27.0.3",
+    "jest-html-reporters": "^3.1.4"
+  },
+  "dependencies": {
+    "@jest/test-sequencer": "^28.1.0",
+    "axios": "^0.21.1",
+    "faker": "^5.5.3",
+    "https": "^1.0.0",
+    "luxon": "^1.27.0",
+    "uuid": "^8.3.2"
+  }
+}

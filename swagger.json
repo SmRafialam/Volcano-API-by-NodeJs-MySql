@@ -513,6 +513,219 @@
         }
       }
     },
+    "/volcano/{id}/comments": {
+      "get": {
+        "description" : "Retrieve all comments and ratings for a specific volcano",
+        "tags": [
+          "Data"
+        ],
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "default": "",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/volcano/{id}/comment": {
+      "post": {
+        "description" : "Allow authenticated users to add a comment and rating for a specific volcano.",
+        "tags": [
+          "Data"
+        ],
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "default": "",
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "default": "66",
+            "type": "string"
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ADDVOLCANOCOMMENTREQUEST"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/volcano/{id}/average-rating": {
+      "get": {
+        "description" : "Calculate and return the average rating of a specific volcano.",
+        "tags": [
+          "Data"
+        ],
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "default": "66",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/volcano/{id}/photos": {
+      "get": {
+        "description": "Retrieve all photos uploaded for a specific volcano.        ",
+        "tags": [
+          "Data"
+        ],
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "default": "66",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/volcano/{id}/photo": {
+      "post": {
+        "description": "Allow authenticated users to upload photos of a specific volcano.",
+        "tags": [
+          "Data"
+        ],
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "default": "",
+            "type": "string"
+          },
+          {
+            "name": "file",
+            "in": "formData",
+            "required": true,
+            "type": "file",
+            "format": "file",
+            "description": ""
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "default": "66",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/volcanoes/nearby": {
+      "get": {
+        "description": "Retrieve all volcanoes within a certain kilometer range of a given latitude and longitude. Accepts query parameters",
+        "tags": [
+          "Data"
+        ],
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "km",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "lat",
+            "in": "query",
+            "required": true,
+            "type": "number",
+            "format": "double",
+            "description": ""
+          },
+          {
+            "name": "long",
+            "in": "query",
+            "required": true,
+            "type": "number",
+            "format": "double",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
     "/user/register": {
       "post": {
         "tags": ["Authentication"],
@@ -895,6 +1108,69 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/user/{email}/favorites": {
+      "get": {
+        "description" : "Retrieve a list of a user's favorite volcanoes.",
+        "tags": [
+          "Profile"
+        ],
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "default": "test@test.com",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/user/{email}/favorite-volcano": {
+      "post": {
+        "description": "Allow users to mark a volcano as a favorite.",
+        "tags": [
+          "Profile"
+        ],
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "default": "",
+            "type": "string"
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ADDVOLCANOFAVORITEREQUEST"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
           }
         }
       }

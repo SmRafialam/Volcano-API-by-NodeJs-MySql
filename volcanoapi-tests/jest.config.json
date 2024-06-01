@@ -1,0 +1,14 @@
+{
+  "reporters": [
+    "default",
+    [
+      "jest-html-reporters",
+      {
+        "pageTitle": "Test Report",
+        "inlineSource": true,
+        "filename": "report.html"
+      }
+    ]
+  ],
+  "testSequencer": "./sequence.js"
+}
